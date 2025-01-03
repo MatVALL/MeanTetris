@@ -1,8 +1,12 @@
-SOURCES = tetris.cpp
-HEADERS = tetriscontroller.h  tetrisdrawer.h  tetris.h
+TEMPLATE = lib
+DEFINES += MAKE_TEST_LIB
+SOURCES = tetris.cpp tetrisdrawer.cpp shape.cpp tetriscontroller.cpp gamestate.cpp shapefactory.cpp
+HEADERS = tetriscontroller.h  tetrisdrawer.h  tetris.h shape.h gamestate.h shapefactory.h
+LIBS += -lncurses
 QMAKE_CXXFLAGS += -g
 QT += core
+QT += widgets
 LIBS += /usr/lib/x86_64-linux-gnu/libQt6*.so
 INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt6/QtWidgets/
 INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt6/
-TARGET = tetris
+DESTDIR = ..
