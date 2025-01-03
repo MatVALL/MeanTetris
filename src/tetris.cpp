@@ -4,7 +4,8 @@ TetrisGame::TetrisGame() {
 };
 
 void TetrisGame::play(Move move) {
-    (void) move;
-    shape->move(Move::DOWN);
+    if (shape->canMove(move, gs)) {
+        shape->move(move);
+    }
 }
 

@@ -43,7 +43,7 @@ bool Square::canMove(Move m, GameState &gs) {
             case NONE:
                 break;
         }
-        if (gs.occupied(x, y) || x <= 0 || y <= 0) {
+        if (x < 0 || x >= gs.size_x || y < 0 || gs.occupied(x, y)) {
             return false;
         }
     }

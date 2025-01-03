@@ -23,5 +23,32 @@ void TerminalDisplay::show(TetrisGame &tg)
         }
         std::cout << std::endl;
     }
+}
 
+
+void NCursesDisplay::showBox(int x, int y, unsigned char c) {
+    y = MAX_Y - y;
+    mvwaddch(win, y, 2*x, c);
+}
+void NCursesDisplay::removeBox(int x, int y) {
+    showBox(x, y, ' ');
+}
+void NCursesDisplay::show(TetrisGame &tg)
+{
+    erase();
+    for (int j = 0; j < MAX_Y; j++) {
+        for (int i = 0; i < MAX_X; i++) {
+            if (tg.gs.occupied(i, j)) {
+                showBox(i, j, 'X');
+            } else {
+                showBox(i, j, '.');
+            }
+        }
+    }
+    if (tg.shape != nullptr) {
+        for (auto b: tg.shape->getBoxes()) {
+            showBox(b.x, b.y, 'O');
+        }
+    }
+    wrefresh(win);
 }
