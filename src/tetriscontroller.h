@@ -10,7 +10,7 @@
 /* sleep */
 #include <thread>         // std::this_thread::sleep_for
 
-enum Move{NONE, LEFT, RIGHT, DOWN, DROP};
+enum Move{NONE, LEFT, RIGHT, DOWN, DROP, ROTATE};
 
 class TetrisController {
     private:

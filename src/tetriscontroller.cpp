@@ -35,6 +35,8 @@ Move  NCursesController::getMove() {
                 return Move::RIGHT;
             case KEY_DOWN:
                 return Move::DOWN;
+            case ' ':
+                return Move::ROTATE;
         }
     }
     return Move::NONE;

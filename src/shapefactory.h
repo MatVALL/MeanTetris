@@ -11,7 +11,7 @@ class ShapeFactory {
 
 class RandomFactory : public ShapeFactory {
     Shape* getShape(GameState &gs) {
-        return new Square(gs.size_x/2, gs.size_y -1);
+        return new Squiggle(gs.size_x/2, gs.size_y -1);
     }
 
 };
