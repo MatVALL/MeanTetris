@@ -29,6 +29,8 @@ int main() {
             gameOver();
             break;
         }
+        tg.gs.lineClear();
+        disp.show(tg);
         tg.shape = sf->getShape(tg.gs);
     }
 

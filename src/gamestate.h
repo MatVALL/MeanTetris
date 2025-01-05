@@ -23,9 +23,13 @@ class GameState {
         }
         delete[] boxes;
     }
+    private:
+        void clearLine(int j);
     public:
         bool occupied(int x, int y);
         void set(int x, int y);
+        bool lineIsFull(int j);
+        void lineClear();
 };
 
 #endif
