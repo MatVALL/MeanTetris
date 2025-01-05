@@ -11,7 +11,15 @@ class ShapeFactory {
 
 class RandomFactory : public ShapeFactory {
     Shape* getShape(GameState &gs) {
-        return new Squiggle(gs.size_x/2, gs.size_y -1);
+        switch (rand()%5) {
+            case 0: return new Squiggle(gs.size_x/2, gs.size_y -1);
+            case 1: return new LeftSquiggle(gs.size_x/2, gs.size_y -1);
+            case 2: return new Square(gs.size_x/2, gs.size_y -1);
+            case 3: return new Straight(gs.size_x/2, gs.size_y -1);
+            case 4: return new TShape(gs.size_x/2, gs.size_y -1);
+
+        }
+        return NULL;
     }
 
 };

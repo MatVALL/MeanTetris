@@ -1,7 +1,7 @@
 TEMPLATE = lib
 DEFINES += MAKE_TEST_LIB
-SOURCES = tetris.cpp tetrisdrawer.cpp shape.cpp tetriscontroller.cpp gamestate.cpp
-HEADERS = tetriscontroller.h  tetrisdrawer.h  tetris.h shape.h gamestate.h
+SOURCES = tetris.cpp tetrisdrawer.cpp shape.cpp tetriscontroller.cpp gamestate.cpp shapefactory.cpp
+HEADERS = tetriscontroller.h  tetrisdrawer.h  tetris.h shape.h gamestate.h shapefactory.h
 LIBS += -lncurses
 QMAKE_CXXFLAGS += -g
 QT += core
