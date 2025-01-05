@@ -1,5 +1,17 @@
 #include "shape.h"
 
+inline Box operator+ (Box a, const Box& b) {
+    a.x += b.x;
+    a.y += b.y;
+    return a;
+}
+
+inline Box operator- (Box a, const Box& b) {
+    a.x -= b.x;
+    a.y -= b.y;
+    return a;
+}
+
 Box ConcreteShape::getCenter() {
     int center_x = 0;
     int center_y = 0;
