@@ -6,10 +6,10 @@ void gameOver() {
 }
 
 int main() {
-    TetrisGame tg;
     NCursesController ctrl(5);
     NCursesDisplay disp(MAX_X, MAX_Y);
     ShapeFactory *sf = new RandomFactory();
+    TetrisGame tg(sf);
 
     disp.show(tg);
     /* maybe the TetrisGame should own the factory.*/

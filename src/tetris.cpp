@@ -1,6 +1,7 @@
 #include "tetris.h"
 
-TetrisGame::TetrisGame() {
+TetrisGame::TetrisGame(ShapeFactory *sf): sf(sf) {
+    shape = sf->getShape(gs);
 };
 
 void TetrisGame::play(Move move) {
