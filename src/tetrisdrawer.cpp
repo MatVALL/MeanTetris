@@ -25,10 +25,12 @@ void TerminalDisplay::show(TetrisGame &tg)
     }
 }
 
-
-void NCursesDisplay::showBox(int x, int y, unsigned char c) {
+void NCursesDisplay::showBox(int x, int y, unsigned char c, Color color) {
     y = MAX_Y - y;
-    mvwaddch(win, y, 2*x, c);
+	wattron(win, COLOR_PAIR(color));
+    mvwaddch(win, y, 2*x+1, c);
+    mvwaddch(win, y, 2*x+2, c);
+	wattroff(win, COLOR_PAIR(color));
 }
 void NCursesDisplay::removeBox(int x, int y) {
     showBox(x, y, ' ');
@@ -39,15 +41,15 @@ void NCursesDisplay::show(TetrisGame &tg)
     for (int j = 0; j < MAX_Y; j++) {
         for (int i = 0; i < MAX_X; i++) {
             if (tg.gs.occupied(i, j)) {
-                showBox(i, j, 'X');
+                showBox(i, j, '0', tg.gs.getColor(i, j));
             } else {
-                showBox(i, j, '.');
+                showBox(i, j, ' ', Color::BLACK);
             }
         }
     }
     if (tg.shape != nullptr) {
         for (auto b: tg.shape->getBoxes()) {
-            showBox(b.x, b.y, 'O');
+            showBox(b.x, b.y, 'O', b.c);
         }
     }
     wrefresh(win);

@@ -4,10 +4,6 @@
 #include "gamestate.h"
 #include "tetriscontroller.h"
 
-struct Box {
-    int x; int y;
-    Box(int x, int y): x(x), y(y) {};
-};
 class Shape {
     public:
         virtual void rotate() = 0;
@@ -38,17 +34,23 @@ class ConcreteShape: public Shape {
 /* TODO: override getcenter for cleaner rotations */
 class Square : public ConcreteShape{
     public:
-        Square(int x, int y);
+        Square(int x, int y) {
+            boxes = std::vector<Box>({
+                    Box(x, y, Color::RED),
+                    Box(x -1, y-1, Color::RED),
+                    Box(x-1, y, Color::RED),
+                    Box(x, y-1, Color::RED)});
+        }
 };
 
 class TShape : public ConcreteShape{
     public:
         TShape(int x, int y) {
             boxes = std::vector<Box>({
-                    Box(x, y),
-                    Box(x -1, y-1),
-                    Box(x +1, y-1),
-                    Box(x, y-1)});
+                    Box(x, y, Color::WHITE),
+                    Box(x -1, y-1, Color::WHITE),
+                    Box(x +1, y-1, Color::WHITE),
+                    Box(x, y-1, Color::WHITE)});
         }
 };
 
@@ -56,10 +58,10 @@ class Squiggle : public ConcreteShape{
     public:
         Squiggle(int x, int y) {
             boxes = std::vector<Box>({
-                    Box(x + 1, y),
-                    Box(x + 1, y-1),
-                    Box(x, y-1),
-                    Box(x, y-2)});
+                    Box(x + 1, y, Color::GREEN),
+                    Box(x + 1, y-1, Color::GREEN),
+                    Box(x, y-1, Color::GREEN),
+                    Box(x, y-2, Color::GREEN)});
         }
 };
 
@@ -67,10 +69,10 @@ class LeftSquiggle : public ConcreteShape{
     public:
         LeftSquiggle(int x, int y) {
             boxes = std::vector<Box>({
-                    Box(x , y),
-                    Box(x , y-1),
-                    Box(x + 1, y-1),
-                    Box(x + 1, y-2)});
+                    Box(x , y, Color::MAGENTA),
+                    Box(x , y-1, Color::MAGENTA),
+                    Box(x + 1, y-1, Color::MAGENTA),
+                    Box(x + 1, y-2, Color::MAGENTA)});
         }
 };
 
@@ -78,20 +80,20 @@ class LeftL : public ConcreteShape{
     public:
         LeftL(int x, int y) {
             boxes = std::vector<Box>({
-                    Box(x +1 , y),
-                    Box(x +1 , y-1),
-                    Box(x +1 , y-2),
-                    Box(x, y-2)});
+                    Box(x +1 , y, Color::CYAN),
+                    Box(x +1 , y-1, Color::CYAN),
+                    Box(x +1 , y-2, Color::CYAN),
+                    Box(x, y-2, Color::CYAN)});
         }
 };
 class LShape : public ConcreteShape{
     public:
         LShape(int x, int y) {
             boxes = std::vector<Box>({
-                    Box(x - 1 , y),
-                    Box(x - 1 , y - 1),
-                    Box(x - 1 , y - 2),
-                    Box(x, y - 2)});
+                    Box(x - 1 , y, Color::YELLOW),
+                    Box(x - 1 , y - 1, Color::YELLOW),
+                    Box(x - 1 , y - 2, Color::YELLOW),
+                    Box(x, y - 2, Color::YELLOW)});
         }
 };
 
@@ -99,10 +101,10 @@ class Straight : public ConcreteShape{
     public:
         Straight(int x, int y) {
             boxes = std::vector<Box>({
-                    Box(x , y),
-                    Box(x + 1, y),
-                    Box(x + 2, y),
-                    Box(x + 3, y)});
+                    Box(x, y, Color::BLUE),
+                    Box(x + 1, y, Color::BLUE),
+                    Box(x + 2, y, Color::BLUE),
+                    Box(x + 3, y, Color::BLUE)});
         }
 };
 

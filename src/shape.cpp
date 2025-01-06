@@ -34,7 +34,7 @@ void ConcreteShape::rotate() {
          *        [1   0]
          * [x   y][y  -x]
          * */
-        boxes[i] = Box(boxes[i].y, -boxes[i].x);
+        boxes[i] = Box(boxes[i].y, -boxes[i].x, boxes[i].c);
         boxes[i] = boxes[i] + center;
     }
 
@@ -116,7 +116,7 @@ int ConcreteShape::drop(GameState &gs) {
         if (gs.occupied(b.x, b.y)) {
             return -1;
         }
-        gs.set(b.x, b.y);
+        gs.set(b.x, b.y, b.c);
     }
     return 0;
 }

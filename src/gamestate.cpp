@@ -4,11 +4,15 @@ bool GameState::occupied(int x, int y) {
     if (x < 0 || x >= size_x || y < 0 || y >= size_y) {
         return true;
     }
-    return boxes[x][y];
+    return boxes[x][y] != nullptr;
 }
 
-void GameState::set(int x, int y) {
-    boxes[x][y] = true;
+void GameState::set(int x, int y, Color c) {
+    boxes[x][y] = new Box(0, 0, c);
+}
+
+Color GameState::getColor(int x, int y) {
+    return boxes[x][y]->c;
 }
 
 bool GameState::lineIsFull(int j) {

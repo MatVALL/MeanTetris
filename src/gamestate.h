@@ -1,24 +1,49 @@
 #ifndef __GAMESTATETETRIS__H
 #define __GAMESTATETETRIS__H
 
+enum Color {
+    RED=1,
+    GREEN,
+    YELLOW,
+    BLUE,
+    MAGENTA,
+    CYAN,
+    WHITE,
+    BLACK,
+};
+
+struct Box {
+    Color c;
+    int x; int y;
+    Box(int x, int y, Color c=WHITE): c(c), x(x), y(y) {};
+};
+inline Box operator+ (Box a, const Box& b);
+inline Box operator- (Box a, const Box& b);
+
+
 /* avoid circular dependency from tetris and shapefactory */
 class GameState {
-    bool **boxes;
+    Box ***boxes;
     public:
     const int size_x, size_y;
     GameState(int x, int y) : size_x(x), size_y(y) {
-        boxes = new bool*[size_x];
+        boxes = new Box**[size_x];
         for (int i = 0; i < size_x; i++) {
-            boxes[i] = new bool[size_y];
+            boxes[i] = new Box*[size_y];
         }
         for (int i = 0; i < size_x; i++) {
             for (int j = 0; j < size_y; j++) {
-                boxes[i][j] = false;
+                boxes[i][j] = nullptr;
             }
         }
     }
     ~GameState() {
         for (int i = 0; i < size_x; i++) {
+            for (int j = 0; j < size_y; j++) {
+                if (boxes[i][j] != nullptr) {
+                    delete boxes[i][j];
+                }
+            }
             delete[] boxes[i];
         }
         delete[] boxes;
@@ -30,6 +55,7 @@ class GameState {
         void set(int x, int y);
         bool lineIsFull(int j);
         void lineClear();
+        Color getColor(int x, int y);
 };
 
 #endif
