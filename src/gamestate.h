@@ -52,9 +52,9 @@ class GameState {
         void clearLine(int j);
     public:
         bool occupied(int x, int y);
-        void set(int x, int y);
+        void set(int x, int y, Color c);
         bool lineIsFull(int j);
-        void lineClear();
+        int lineClear();
         Color getColor(int x, int y);
 };
 

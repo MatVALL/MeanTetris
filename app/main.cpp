@@ -29,7 +29,9 @@ int main() {
             gameOver();
             break;
         }
-        tg.gs.lineClear();
+        if ((lineClearCnt = tg.gs.lineClear()) >= 0) {
+            tg.linesCleared(lineClearCnt);
+        }
         disp.show(tg);
         tg.shape = sf->getShape(tg.gs);
     }

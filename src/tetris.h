@@ -12,7 +12,7 @@ const int MAX_Y = 25;
 
 class TetrisGame {
     public:
-        int64_t score = 0;
+        int64_t lines = 0;
         Shape *shape = nullptr;
         ShapeFactory *sf;
         GameState gs = GameState(MAX_X, MAX_Y);
@@ -21,4 +21,5 @@ class TetrisGame {
         void gameLoop(void);
         void linesCleared(int lines);
 };
+
 #endif

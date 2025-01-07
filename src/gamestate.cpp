@@ -22,12 +22,17 @@ bool GameState::lineIsFull(int j) {
     return true;
 }
 
-void GameState::lineClear() {
+int GameState::lineClear() {
+    int lines = 0;
+
     for (int j = size_y - 1; j >= 0 ; j--) {
         if (lineIsFull(j)) {
+            lines++;
             clearLine(j);
         }
     }
+
+    return lines;
 }
 
 void GameState::clearLine(int j) {

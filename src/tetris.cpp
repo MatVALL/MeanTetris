@@ -10,3 +10,7 @@ void TetrisGame::play(Move move) {
     }
 }
 
+void TetrisGame::linesCleared(int lines) {
+    /* TODO: make score */
+    this->lines += lines;
+}

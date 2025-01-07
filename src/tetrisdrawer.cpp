@@ -35,9 +35,20 @@ void NCursesDisplay::showBox(int x, int y, unsigned char c, Color color) {
 void NCursesDisplay::removeBox(int x, int y) {
     showBox(x, y, ' ');
 }
+void NCursesDisplay::displayScore(TetrisGame &tg)
+{
+    erase();
+    box(score, 0, 0);
+    /* TODO: score */
+    mvwprintw(score, 1, 1, "Scores:%8d", 0);
+    mvwprintw(score, 2, 1, "Lines:%9ld", tg.lines);
+    wrefresh(score);
+}
 void NCursesDisplay::show(TetrisGame &tg)
 {
     erase();
+    box(win, 0, 0);
+
     for (int j = 0; j < MAX_Y; j++) {
         for (int i = 0; i < MAX_X; i++) {
             if (tg.gs.occupied(i, j)) {
@@ -52,5 +63,8 @@ void NCursesDisplay::show(TetrisGame &tg)
             showBox(b.x, b.y, 'O', b.c);
         }
     }
+
+    displayScore(tg);
     wrefresh(win);
+    wrefresh(score);
 }
