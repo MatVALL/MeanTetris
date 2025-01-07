@@ -2,6 +2,13 @@
 #define __TETRISSHAPEFACTORY__H
 #include "gamestate.h"
 #include "shape.h"
+#include <functional>
+
+class ShapeBuilder {
+    public:
+        std::function<Shape*(void)> build;
+        ShapeBuilder(std::function<Shape*(void)> build) : build(build) {};
+};
 
 class ShapeFactory {
     public:
@@ -9,18 +16,26 @@ class ShapeFactory {
         virtual ~ShapeFactory() = default;
 };
 
+
 class RandomFactory : public ShapeFactory {
-    Shape* getShape(GameState &gs) {
-        switch (rand()%5) {
-            case 0: return new Squiggle(gs.size_x/2, gs.size_y -1);
-            case 1: return new LeftSquiggle(gs.size_x/2, gs.size_y -1);
-            case 2: return new Square(gs.size_x/2, gs.size_y -1);
-            case 3: return new Straight(gs.size_x/2, gs.size_y -1);
-            case 4: return new TShape(gs.size_x/2, gs.size_y -1);
-
+    private:
+        std::vector<ShapeBuilder> builders;
+    public:
+        Shape* getShape(GameState &gs) {
+            (void)gs;
+            ShapeBuilder b = builders[rand()%builders.size()];
+            return b.build();
         }
-        return NULL;
-    }
 
+        void addBuilder(ShapeBuilder sb) {
+            builders.push_back(sb);
+        }
+
+        void fillShapeFactory(int x, int y);
+        RandomFactory(int max_x, int max_y) {
+            fillShapeFactory(max_x/2, max_y-1);
+        }
 };
+
+
 #endif

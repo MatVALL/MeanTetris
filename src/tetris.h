@@ -19,5 +19,6 @@ class TetrisGame {
         TetrisGame(ShapeFactory *sp);
         void play(Move);
         void gameLoop(void);
+        void linesCleared(int lines);
 };
 #endif

@@ -6,13 +6,13 @@ void gameOver() {
 }
 
 int main() {
+    int lineClearCnt = 0;
     NCursesController ctrl(5);
     NCursesDisplay disp(MAX_X, MAX_Y);
-    ShapeFactory *sf = new RandomFactory();
+    RandomFactory *sf = new RandomFactory(MAX_X, MAX_Y);
     TetrisGame tg(sf);
 
     disp.show(tg);
-    /* maybe the TetrisGame should own the factory.*/
     tg.shape = sf->getShape(tg.gs);
     for (;;) {
          while (tg.shape->canMove(Move::DOWN, tg.gs)){
