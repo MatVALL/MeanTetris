@@ -1,0 +1,3 @@
+# MeanTetris
+MeanTetris aims to be a tetris game with multiple possible output (from terminal or with a qt window), that has multiple way of choosing the tetris shapes, and multiple ways to be controlled (eg: form the terminal, or from the qt window, with mouse cursor or with keyboard ...).
+The name MeanTetris comes from the fact that one of the way to choose the shapes will not be random, and will be the shape that can clear the least amount of lines.
