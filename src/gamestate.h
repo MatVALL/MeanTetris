@@ -56,6 +56,7 @@ class GameState {
         bool lineIsFull(int j);
         int lineClear();
         Color getColor(int x, int y);
+        bool posIsCorrect(int x, int y);
 };
 
 #endif

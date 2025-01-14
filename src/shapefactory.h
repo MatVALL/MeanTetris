@@ -6,13 +6,13 @@
 
 class ShapeBuilder {
     public:
-        std::function<Shape*(void)> build;
-        ShapeBuilder(std::function<Shape*(void)> build) : build(build) {};
+        std::function<std::unique_ptr<Shape>(void)> build;
+        ShapeBuilder(std::function<std::unique_ptr<Shape>(void)> build) : build(build) {};
 };
 
 class ShapeFactory {
     public:
-        virtual Shape *getShape(GameState &gs) = 0;
+        virtual std::unique_ptr<Shape> getShape(GameState &gs) = 0;
         virtual ~ShapeFactory() = default;
 };
 
@@ -21,7 +21,7 @@ class RandomFactory : public ShapeFactory {
     private:
         std::vector<ShapeBuilder> builders;
     public:
-        Shape* getShape(GameState &gs) {
+        std::unique_ptr<Shape> getShape(GameState &gs) {
             (void)gs;
             ShapeBuilder b = builders[rand()%builders.size()];
             return b.build();

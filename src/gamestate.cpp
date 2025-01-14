@@ -1,13 +1,20 @@
 #include "gamestate.h"
 
+bool GameState::posIsCorrect(int x, int y) {
+    return (x >= 0 && x < size_x &&  y >= 0  && y < size_y);
+}
+
 bool GameState::occupied(int x, int y) {
-    if (x < 0 || x >= size_x || y < 0 || y >= size_y) {
-        return true;
-    }
-    return boxes[x][y] != nullptr;
+    return posIsCorrect(x, y) && boxes[x][y] != nullptr;
 }
 
 void GameState::set(int x, int y, Color c) {
+    if (!posIsCorrect(x, y)) {
+        return;
+    }
+    if (boxes[x][y] != nullptr) {
+        delete boxes[x][y];
+    }
     boxes[x][y] = new Box(0, 0, c);
 }
 
@@ -36,11 +43,13 @@ int GameState::lineClear() {
 }
 
 void GameState::clearLine(int j) {
-    for(int i = 0; i < size_x; i++)
-        boxes[i][size_y-1] = 0;
-    for (int y = j; y < size_y-1; y++) {
+    for(int i = 0; i < size_x; i++) {
+            delete boxes[i][j];
+            boxes[i][j] = nullptr;
+    }
+    for (int y = j + 1; y < size_y-1; y++) {
         for (int x = 0; x < size_x; x++) {
-            boxes[x][y] = boxes[x][y+1];
+            boxes[x][y-1] = boxes[x][y];
         }
     }
 }

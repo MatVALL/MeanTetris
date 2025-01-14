@@ -8,12 +8,12 @@
 #include "shapefactory.h"
 
 const int MAX_X = 12;
-const int MAX_Y = 25;
+const int MAX_Y = 20;
 
 class TetrisGame {
     public:
         int64_t lines = 0;
-        Shape *shape = nullptr;
+        std::unique_ptr<Shape> shape = nullptr;
         ShapeFactory *sf;
         GameState gs = GameState(MAX_X, MAX_Y);
         TetrisGame(ShapeFactory *sp);

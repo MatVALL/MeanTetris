@@ -8,7 +8,6 @@ void TerminalDisplay::show(TetrisGame &tg)
             printedboard[i][j] = (tg.gs.occupied(i, j)? '#':'.');
         }
     }
-    std::cout << tg.shape << std::endl;
     if (tg.shape != nullptr) {
         for (auto b: tg.shape->getBoxes()) {
             std::cout << b.x << b.y << std::endl;
